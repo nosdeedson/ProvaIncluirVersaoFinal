@@ -1,6 +1,9 @@
 # ProvaIncluirVersaoFinal
-Versão final do teste
-Para rodar a aplicação siga os passos abaixo. (PRESTE ATENÇAO AS OBSERVAÇÕES, SE O TUDO OCORRER BEM OS PASSOS DA OBSERVAÇÃO NÃO SÃO NECESSÁRIOS).
+Versão final do teste.
+
+Qualquer um que queira rodar esta aplicação siga os passos abaixo.
+
+Para rodar a aplicação siga os passos abaixo. (PRESTE ATENÇAO AS OBSERVAÇÕES, SE TUDO OCORRER BEM NEM TODOS OS PASSOS DA OBSERVAÇÃO SÃO NECESSÁRIOS).
 
 Para usar este projeto é necessário instalar o docker.
 
@@ -14,22 +17,26 @@ para ter acesso ao container do php;
 Rode o comando "composer install";
 
 Depois rode o comando "vendor/bin/doctrine-migrations migrations:migrate" para 
-criar as tabelas no banco de dados.
+criar as tabelas no banco de dados. Caso aparça no terminal " no migrations to execute";
 
 OBSERVAÇÃO ( Siga os passos abaixo caso haja erro na criação das tabelas no banco de dados)
 
 Caso exista um banco de dados com o nome "provaincluir2019" e o mesmo tenha as 
 tabelas " bolsa_familia, doctrine_migration_versions, licitacao, municipio " o comando retornará
-que não existem "migrations to execute", isto ocorre porque as tabelas já existem.
+que não existem "no migrations to execute", isto ocorre porque as tabelas já existem.
 exclua as tabelas para fazer as migrations.
 
-Para acessar o container do mysql use o comando "docker exec -it incluir2019-sql bash"
-depois: "mysql -u provaincluir2019 -p provaincluir2019" 
-depois: "provaincluir2019";
+Para acessar o container do mysql use o comando:
+"docker exec -it incluir2019-sql bash"
+"mysql -u provaincluir2019 -p provaincluir2019" 
+"provaincluir2019";
 
-Para excluir as tabelas use o comando: "DROP TABLE bolsa_familia, doctrine_migration_versions, 
-licitacao, municipio;";
+Para excluir as tabelas use o comando: 
+"DROP TABLE bolsa_familia, doctrine_migration_versions, licitacao, municipio;";
 
+Use O comando navamente "vendor/bin/doctrine-migrations migrations:migrate" em um container php.
+
+Use o comando " SHOW TABLES;" para ver se as tabelas foram criadas;
 
 Após a criação das tabelas use o comando " SHOW CREATE TABLE licitacao; ".
 Verifique se a segunda coluna está nomeada como "municipio_id", caso esteja com outro
@@ -58,6 +65,3 @@ curl -X GET "http://localhost:8888/municipio/3132404/licitacoes?data_inicial=01/
 curl -X GET "http://localhost:8888/municipio" | jq
 
 curl -X GET "http://localhost:8888/municipio/3132404/bolsa-familia?data_inicial=06/04/2016&data_final=01/08/2016" | jq
-
-
-
